@@ -1,0 +1,271 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    min-height: 100vh;
+    margin: 0px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    background: linear-gradient(to bottom right, #89f7fe, #66a6ff);
+}
+
+.title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 10px;
+
+    width: 100%;
+    max-width: 400px;
+}
+
+h1{
+    background: linear-gradient(to right, #768df3, #5f3589);
+    background-clip: text;
+    color: transparent;
+
+    font-size: 48px;
+}
+
+#mode{
+    font-size: 16px;
+
+    color: white;
+    background-color: #5f3589;
+
+    border: none;
+    border-radius: 35px;
+
+    padding: 6px 14px;
+
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+}
+#mode:hover{
+    background-color: hsl(270, 44%, 27%);
+}
+#mode:active{
+    background-color: hsl(270, 44%, 47%);
+}
+
+.container{
+    width: 90%;
+    max-width: 480px;
+
+    margin: auto;
+    padding: 25px;
+
+    border-radius: 20px;
+    background-color: white;
+
+    box-shadow: 0px 4px 15px rgb(0, 0, 0, 0.1);
+}
+
+.box{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+#todo{
+    min-width: 300px;
+    padding: 12px 20px;
+
+    font-size: 18px;
+    font-weight: 500;
+
+    color: hsla(0, 2%, 12%, 0.89);
+    border: 1px solid grey;
+    border-radius: 12px;
+}
+#todo:hover{
+    transform: scale(1.05);
+    margin: 5px;
+}
+
+#add{
+    margin: 10px;
+    width: 50px;
+    height: 50px;
+    
+    font-size: 40px;
+    font-family: 'segoe UI';
+    font-weight: 600;
+
+    border: none;
+    border-radius: 30%;
+
+    color: white;
+    background-color: hsl(121, 63%, 45%);
+
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#add:hover{
+    background-color: hsl(121, 63%, 36%);
+    transition: 0.3s;
+    transform: scale(1.05);
+}
+#add:active{
+    background-color: hsl(121, 63%, 56%);
+}
+
+#suggestion{
+    font-size: 14px;
+    color: rgb(250, 82, 73);
+    margin-left: 8px;
+}
+
+#showlist{
+    margin-top: 20px;
+
+    width: 100%;
+    max-width: 450px;
+}
+
+.taskWrapper{
+    width: 100%;
+    max-width: 500px;
+    padding: 10px 18px;
+    margin: 10px 0px;
+    box-sizing: border-box;
+
+    border: 1px solid rgb(190, 190, 190);
+    border-radius: 10px;
+    
+    text-align: center;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+
+    animation: fadeIn 0.3s ease;
+}
+.taskWrapper:hover{
+    transform: scale(1.05);
+    margin: 4px;
+}
+.rightSide{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.leftSide{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.editTask{
+    font-size: 16px;
+    border: 1px solid grey;
+
+    padding: 8px 16px;
+    border-radius: 10px;
+    margin: 0px 8px;
+}
+.editButton{
+    color: white;
+    background-color: hsl(120, 59%, 44%);
+
+    border: none;
+    border-radius: 10px;
+    padding: 8px 18px;
+}
+.editButton:hover{
+    background-color: hsl(120, 59%, 34%);
+    transition: 0.4s;
+    transform: scale(1.05);
+}
+.editButton:active{
+    background-color: hsl(120, 59%, 54%);
+}
+
+.saveButton{
+    color: white;
+    background-color: hsl(203, 86%, 51%);
+
+    border: none;
+    border-radius: 10px;
+    padding: 8px 18px;   
+}
+.saveButton:hover{
+    background-color: hsl(203, 86%, 41%);
+    transition: 0.4s;
+    transform: scale(1.05);
+}
+.saveButton:active{
+    background-color: hsl(203, 86%, 61%);
+}
+
+.delBtn{
+    border: none;
+    border-radius: 10px;
+
+    left: 5px;
+    padding: 10px 18px;
+    font-size: 12px;
+    
+    color: white;
+    background-color: hsl(10, 90%, 60%);
+
+    cursor: pointer;
+}
+.delBtn:hover{
+    background-color: hsl(10, 90%, 50%);
+    transition: 0.4s;
+    transform: scale(1.05);
+}
+.delBtn:active{
+    background-color: hsl(10, 90%, 70%);
+}
+
+.check{
+    transform: scale(1.5);
+    margin: 10px;
+}
+.taskDone{
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.nightMode{
+    background: linear-gradient(to bottom, #434343, #1e1e1e);
+    color: white;
+}
+
+@keyframes fadeIn{
+    from{
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+@media screen and ( max-width: 600px ) {
+    .taskWrapper{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #showlist{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
