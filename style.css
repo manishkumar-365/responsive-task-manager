@@ -50,7 +50,8 @@ h1{
     background-color: hsl(270, 44%, 27%);
 }
 #mode:active{
-    background-color: hsl(270, 44%, 47%);
+    background-color: hsl(270, 45%, 57%);
+    transition: 0.3s;
 }
 
 .container{
@@ -74,7 +75,8 @@ h1{
 }
 
 #todo{
-    min-width: 300px;
+    width: 100%;
+    max-width: 340px;
     padding: 12px 20px;
 
     font-size: 18px;
@@ -86,6 +88,7 @@ h1{
 }
 #todo:hover{
     transform: scale(1.05);
+    transition: 0.3s;
     margin: 5px;
 }
 
@@ -102,7 +105,7 @@ h1{
     border-radius: 30%;
 
     color: white;
-    background-color: hsl(121, 63%, 45%);
+    background-color: hsl(120, 59%, 44%);
 
     cursor: pointer;
 
@@ -134,7 +137,7 @@ h1{
 
 .taskWrapper{
     width: 100%;
-    max-width: 500px;
+    max-width: 420px;
     padding: 10px 18px;
     margin: 10px 0px;
     box-sizing: border-box;
@@ -154,6 +157,7 @@ h1{
     animation: fadeIn 0.3s ease;
 }
 .taskWrapper:hover{
+    transition: 0.3s;
     transform: scale(1.05);
     margin: 4px;
 }
@@ -169,12 +173,14 @@ h1{
 }
 
 .editTask{
+    width: 100%;
+    max-width: 320px;
     font-size: 16px;
     border: 1px solid grey;
 
-    padding: 8px 16px;
+    padding: 8px 14px;
     border-radius: 10px;
-    margin: 0px 8px;
+    margin: 6px;
 }
 .editButton{
     color: white;
@@ -233,17 +239,26 @@ h1{
 }
 
 .check{
-    transform: scale(1.5);
+    transform: scale(1.6);
     margin: 10px;
 }
 .taskDone{
     text-decoration: line-through;
-    opacity: 0.6;
+    opacity: 0.7;
 }
 
 .nightMode{
     background: linear-gradient(to bottom, #434343, #1e1e1e);
     color: white;
+}
+
+.taskcountstyle{
+    color: hsl(0, 4%, 85%);
+    font-size: 14px;
+    margin-left: 8px;
+}
+.taskcountstyle:hover{
+    color: hsl(0, 0%, 100%);
 }
 
 @keyframes fadeIn{
@@ -267,5 +282,9 @@ h1{
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+
+    .title{
+        margin: 0px;
     }
 }

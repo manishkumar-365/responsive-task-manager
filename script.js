@@ -3,6 +3,8 @@
 const todo = document.getElementById("todo");
 const add = document.getElementById("add");
 const suggestion = document.getElementById("suggestion");
+let taskcount = document.getElementById("taskcount");
+taskcount.classList.add('taskcountstyle');
 const showlist = document.getElementById("showlist");
 const mode = document.getElementById('mode');
 let taskArray = [];
@@ -13,13 +15,16 @@ mode.addEventListener('click', () => {
     container.classList.toggle('nightMode');
 
     if(container.classList.contains('nightMode')){
-        mode.textContent='☀️'
+        mode.textContent='☀️';
         mode.style.backgroundColor='white';
+        localStorage.setItem("theme", "dark");
     }
     else{
-        mode.textContent='🌙'
-        mode.style.backgroundColor='#5f3589'
+        mode.textContent='🌙';
+        mode.style.backgroundColor='#5f3589';
+        localStorage.setItem("theme", "light");
     }
+
 })
 
 add.addEventListener("click", () => {
@@ -36,14 +41,25 @@ add.addEventListener("click", () => {
 
 function addtask() {
     const tasktext = todo.value;
-    taskArray.push(tasktext);
+    const newTask = {
+        text: tasktext,
+        completed: false    // from start it should be false otherwise if render with taskdone
+    };
+    taskArray.push(newTask);
     // saving data on local storage and converting into string
     localStorage.setItem("taskArray", JSON.stringify(taskArray));
 
-    rendertask(tasktext);
+    rendertask(newTask);
+    updateCounter();
 }
 
-function rendertask(tasktext) {
+function updateCounter(){
+    const total = taskcount.textContent = `${taskArray.length}`;
+    const finished = taskcount.textContent = `${taskArray.filter( task => task.completed).length }`
+    taskcount.textContent = `${total} Total • ${finished} Completed • ${total-finished} Remaining`;
+}
+
+function rendertask(task) {
 
     const div = document.createElement("div");
     div.classList.add("taskWrapper");
@@ -56,10 +72,14 @@ function rendertask(tasktext) {
     const checkBox = document.createElement("input");
     checkBox.type = 'checkbox';
     checkBox.classList.add('check')
+    checkBox.checked = task.completed;
     leftSide.append(checkBox);
 
     const span = document.createElement("span");
-    span.textContent = tasktext;
+    span.textContent = task.text;
+    if(task.completed){
+        span.classList.add('taskDone');
+    }
     leftSide.append(span);
 
     const rightSide = document.createElement('div');
@@ -76,12 +96,16 @@ function rendertask(tasktext) {
     del.classList.add("delBtn");
     rightSide.append(del);
 
-    checkBox.addEventListener("change", taskCompleted)
+    checkBox.addEventListener("change", (event) => {
+        taskCompleted(event, task);
+
+    })
 
     edit.addEventListener("click", editTask);
     
     del.addEventListener("click", deleteTask);
 
+    updateCounter();
 }
 
 // its runs when page refresh
@@ -100,6 +124,7 @@ function loadData() {
     else {
         suggestion.textContent = "No task is saved yet!!"
     }
+    updateCounter();
 }
 
 function editTask(event){
@@ -170,22 +195,47 @@ function deleteTask(event) {
     const div = event.target.parentElement.parentElement;
 
     const deletingTask = div.querySelector("span").textContent;
-    taskArray = taskArray.filter(task => task !== deletingTask);
+    taskArray = taskArray.filter(task => task.text !== deletingTask);
 
     localStorage.setItem("taskArray", JSON.stringify(taskArray));
 
     div.remove();
+    updateCounter();
 }
 
-function taskCompleted() {
+function taskCompleted(event,task) {
+
+    const checkBox = event.target;
+    
     if (event.target.checked) {
         const div = event.target.parentElement;
         div.querySelector('span').classList.toggle('taskDone');
+        task.completed = checkBox.checked;
+        localStorage.setItem("taskArray", JSON.stringify(taskArray));
     }
     else {
         const div = event.target.parentElement;
         div.querySelector('span').classList.toggle('taskDone');
+        task.completed = checkBox.checked;
+        localStorage.setItem("taskArray", JSON.stringify(taskArray));
     }
 }
 
 loadData();
+
+function loadTheme(){
+    const theme = localStorage.getItem("theme");
+    const container = document.querySelector('.container');
+
+    if(theme==="dark"){
+        container.classList.add('nightMode');
+        mode.textContent='☀️';
+        mode.style.backgroundColor='white';
+
+    }
+    else{
+        container.classList.remove('nightMode');
+    }
+}
+
+loadTheme();
