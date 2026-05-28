@@ -77,19 +77,29 @@ h1{
 #todo{
     width: 100%;
     max-width: 340px;
-    padding: 12px 20px;
+    padding: 14px 18px;
 
     font-size: 18px;
     font-weight: 500;
 
     color: hsla(0, 2%, 12%, 0.89);
-    border: 1px solid grey;
+    border: 1px solid rgba(78, 78, 78, 0.6);
     border-radius: 12px;
 }
 #todo:hover{
     transform: scale(1.05);
     transition: 0.3s;
     margin: 5px;
+}
+#todo:focus{
+   outline:none;
+}
+#todo::placeholder{
+   color: rgba(158, 157, 157, 0.8);
+   font-size: 15px;
+}
+.todoDarkMode{
+    border:1px solid rgba(255,255,255,0.15);
 }
 
 #add{
@@ -121,7 +131,6 @@ h1{
 #add:active{
     background-color: hsl(121, 63%, 56%);
 }
-
 #suggestion{
     font-size: 14px;
     color: rgb(250, 82, 73);
@@ -178,9 +187,12 @@ h1{
     font-size: 16px;
     border: 1px solid grey;
 
-    padding: 8px 14px;
+    padding: 10px 14px;
     border-radius: 10px;
     margin: 6px;
+}
+.editTask:focus{
+   outline:none;
 }
 .editButton{
     color: white;
@@ -247,18 +259,27 @@ h1{
     opacity: 0.7;
 }
 
-.nightMode{
+.nightMode {
     background: linear-gradient(to bottom, #434343, #1e1e1e);
     color: white;
 }
-
-.taskcountstyle{
-    color: hsl(0, 4%, 85%);
+.nightMode #taskcount{
+    color: rgb(181, 181, 181);
+    margin-left: 6px;
     font-size: 14px;
-    margin-left: 8px;
 }
-.taskcountstyle:hover{
-    color: hsl(0, 0%, 100%);
+.nightMode #taskcount:hover{
+    color: rgb(240, 240, 240);
+    transition: 0.3s ease;
+}
+.taskcountStyle{
+    color: rgb(112, 112, 112);
+    margin-left: 6px;
+    font-size: 14px;
+}
+.taskcountStyle:hover{
+    color: rgb(69, 68, 68);
+    transition: 0.3s ease;
 }
 
 @keyframes fadeIn{

@@ -4,7 +4,7 @@ const todo = document.getElementById("todo");
 const add = document.getElementById("add");
 const suggestion = document.getElementById("suggestion");
 let taskcount = document.getElementById("taskcount");
-taskcount.classList.add('taskcountstyle');
+taskcount.classList.toggle('taskcountStyle');
 const showlist = document.getElementById("showlist");
 const mode = document.getElementById('mode');
 let taskArray = [];
@@ -54,8 +54,8 @@ function addtask() {
 }
 
 function updateCounter(){
-    const total = taskcount.textContent = `${taskArray.length}`;
-    const finished = taskcount.textContent = `${taskArray.filter( task => task.completed).length }`
+    const total = `${taskArray.length}`;
+    const finished = `${taskArray.filter( task => task.completed).length }`
     taskcount.textContent = `${total} Total • ${finished} Completed • ${total-finished} Remaining`;
 }
 
@@ -72,7 +72,7 @@ function rendertask(task) {
     const checkBox = document.createElement("input");
     checkBox.type = 'checkbox';
     checkBox.classList.add('check')
-    checkBox.checked = task.completed;
+    checkBox.checked = task.completed; // it is known using newtask object that " is this task completed"
     leftSide.append(checkBox);
 
     const span = document.createElement("span");
@@ -181,8 +181,8 @@ function updateArray(oldtask,newtask){
 
     taskArray = taskArray.map(element => {
 
-        if(oldtask===element){
-            return newtask;
+        if(element.text===oldtask){
+            element.text=newtask;
         }
 
         return element;
@@ -207,15 +207,15 @@ function taskCompleted(event,task) {
 
     const checkBox = event.target;
     
-    if (event.target.checked) {
+    if (checkBox.checked) {
         const div = event.target.parentElement;
-        div.querySelector('span').classList.toggle('taskDone');
+        div.querySelector('span').classList.add('taskDone');
         task.completed = checkBox.checked;
         localStorage.setItem("taskArray", JSON.stringify(taskArray));
     }
     else {
         const div = event.target.parentElement;
-        div.querySelector('span').classList.toggle('taskDone');
+        div.querySelector('span').classList.remove('taskDone');
         task.completed = checkBox.checked;
         localStorage.setItem("taskArray", JSON.stringify(taskArray));
     }
@@ -224,7 +224,7 @@ function taskCompleted(event,task) {
 loadData();
 
 function loadTheme(){
-    const theme = localStorage.getItem("theme");
+    const theme = localStorage.getItem("theme"); 
     const container = document.querySelector('.container');
 
     if(theme==="dark"){
